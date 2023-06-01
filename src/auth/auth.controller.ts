@@ -6,7 +6,14 @@ import { AuthGuard } from './guards';
 import { Public } from './decorators/public.decorator';
 import { GetUser } from './decorators/get.user.decorator';
 import { User } from 'src/database/entities/User.entity';
+import {
+  ApiBadRequestResponse,
+  ApiCreatedResponse,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(private userService: AuthService) {}
@@ -25,6 +32,12 @@ export class AuthController {
 
   @Post('token')
   @Public()
+  @ApiCreatedResponse({
+    description: 'User logged in',
+  })
+  @ApiBadRequestResponse({
+    description: 'something wrong happened',
+  })
   async login(@Body() dto: LoginUser) {
     return this.userService.loginUser(dto);
   }

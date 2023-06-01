@@ -2,6 +2,8 @@ import {
   Body,
   Controller,
   Get,
+  HttpCode,
+  HttpStatus,
   Param,
   ParseIntPipe,
   Post,
@@ -13,13 +15,20 @@ import { CreateProduct } from './dto';
 import { GetUser } from 'src/auth/decorators/get.user.decorator';
 import { User } from 'src/database/entities/User.entity';
 import { Product } from 'src/database/entities/Product.entity';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('product')
 @Controller('product')
 export class ProductController {
   constructor(private productService: ProductService) {}
 
   @Public()
   @Get()
+  @HttpCode(HttpStatus.OK)
+  @ApiResponse({
+    description: 'Fetch list of all products',
+    type: Product,
+  })
   async getAll(): Promise<Product[]> {
     return this.productService.getAllProducts();
   }
