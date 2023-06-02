@@ -16,23 +16,23 @@ pipeline {
         }
 
 
-        //  stage('SonarQube Analysis') {
-        //         steps {
-        //             script {
+         stage('SonarQube Analysis') {
+                steps {
+                    script {
 
-        //                 def scannerHome = tool 'SonarScanner';
-        //                     withSonarQubeEnv() {
-        //                     sh "${scannerHome}/bin/sonar-scanner"
-        //                     }
+                        def scannerHome = tool 'SonarScanner';
+                            withSonarQubeEnv() {
+                            sh "${scannerHome}/bin/sonar-scanner"
+                            }
 
-        //             }
-        //         }
-        //     }
+                    }
+                }
+            }
 
         stage("Deploy to dockerhub") { 
             steps { 
                 script{
-                    sh "This step pushed the built image to dockerhub"
+                    sh "echo This step pushed the built image to dockerhub"
                 }
             }
         }
