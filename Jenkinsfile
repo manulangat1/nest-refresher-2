@@ -33,11 +33,10 @@ pipeline {
             steps { 
                 script{
                     sh "echo This step pushed the built image to dockerhub"
-                    withCredentials (
-                        [
-                            usernamePassword(credentials:'docker-hub-creds', usernameVariable: USER , passwordVariable: PASS)
-                        ]
-                    )  {
+                    withCredentials ([
+                            // usernamePassword(credentials:'docker-hub-creds', usernameVariable: USER , passwordVariable: PASS)
+                            usernamePassword(credentials:'docker-hub-creds', usernameVariable:USER, passwordVariable:PASSWORD)
+                        ])  {
                         sh "docker ps"
                         sh " ${env.BRANCH_NAME}"
                     // sh "echo $PASSORD | docker login -u $USER --password-stdin"
