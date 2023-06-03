@@ -46,7 +46,7 @@ pipeline {
                     usernamePassword(credentialsId:'docker-hub-creds', usernameVariable:'USER', passwordVariable:'PASSWORD')
                 ]) { 
                     // sh "docker build . -t YOUR_IMAGE_NAME"
-                    sh "echo $PASSORD | docker login -u $USER --password-stdin"
+                    sh "echo $PASSWORD | docker login -u $USER --password-stdin"
                     // sh "docker push YOUR_IMAGE_NAME"
                 }
                 }
