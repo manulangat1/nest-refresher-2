@@ -15,12 +15,13 @@ export class OrderItem {
   @PrimaryGeneratedColumn()
   id: number;
 
-  //   @OneToMany(() => Product, (product) => product.orderItem)
-  //   product: Product[];
+  // @ManyToMany(() => Product)
+  // @JoinTable()
+  // product: Product[];
 
-  @ManyToMany(() => Product)
-  @JoinTable()
-  product: Product[];
+  @ManyToOne(() => Product, (product) => product.orderItem)
+  product: Product;
+
   @Column({ default: 1 })
   quantity: number;
 

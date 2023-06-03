@@ -28,16 +28,21 @@ export class ProductService {
         user: user,
         isActive: true,
       },
+      relations: ['orderItems', 'orderItems.product'],
     });
     return orders;
   }
 
   async getProductById(id) {
-    return await this.producctRepository.find({
+    const product = await this.producctRepository.find({
       where: {
         id: id,
       },
     });
+    if (!product) {
+      throw new HttpException('Product not found', 404);
+    }
+    return product;
   }
   async createOrder(user) {
     const new_order = await this.OrderRepo.create({
@@ -51,7 +56,7 @@ export class ProductService {
   async getOrderItem(product, order) {
     return await this.OrderItemRepo.find({
       where: {
-        product: product[0],
+        product: product,
         order: order,
       },
     });
@@ -64,35 +69,63 @@ export class ProductService {
     });
     return await this.OrderItemRepo.save(new_order_item);
   }
+
   async addToOrder(id: number, user: User) {
     const product = await this.getProductById(id);
-    console.log(product);
+
     if (product.length < 1) {
       throw new HttpException('Product not found', 404);
     }
-    const orderExists = await this.getActiveOrder(user);
-    console.log(orderExists);
-    if (!orderExists) {
-      await this.createOrder(user);
-    }
 
-    const orderItem = await this.getOrderItem(product[0], orderExists);
-    console.log('my order item', orderItem);
-    if (orderItem.length < 1) {
+    const orderExists = await this.getActiveOrder(user);
+
+    console.log(orderExists, ' my order exists');
+
+    if (!orderExists) {
+      const new_order = await this.createOrder(user);
+      console.log(new_order, 'my newly created order');
+      const orderItem = await this.getOrderItem(product[0], new_order);
+      console.log(orderItem, 'my order item');
       const saved_order_item = await this.createOrderItem(
-        orderExists[0],
-        product,
+        new_order,
+        product[0],
         product[0].price,
       );
 
       console.log('Newly created', saved_order_item);
+      console.log('Newly created');
+
+      console.log('new_order', new_order);
+      //   console.log('new_order', new_order);
+      new_order.total_price += parseInt(product[0].price);
+      await this.OrderRepo.save(new_order);
+      return new_order;
+    }
+    const orderItem = await this.getOrderItem(product[0], orderExists);
+
+    console.log(orderItem, ' my orderItem outside', orderItem.length < 1);
+
+    if (orderItem.length < 1) {
+      const saved_order_item = await this.createOrderItem(
+        orderExists,
+        product[0],
+        product[0].price,
+      );
+
+      console.log('Newly created', saved_order_item);
+      orderExists.total_price += parseInt(product[0].price);
+      await this.OrderRepo.save(orderExists);
     } else {
       orderItem[0].quantity += 1;
       orderItem[0].price = orderItem[0].quantity * parseInt(product[0].price);
       await this.OrderItemRepo.save(orderItem);
+
+      // increase the price
+      orderExists.total_price += parseInt(product[0].price);
+      await this.OrderRepo.save(orderExists);
       console.log('updated', orderItem);
     }
 
-    return 'hello';
+    return orderExists;
   }
 }

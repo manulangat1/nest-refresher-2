@@ -13,10 +13,6 @@ export class Order {
   @PrimaryGeneratedColumn()
   id: number;
 
-  //   @Column()
-  //   @ManyToOne(() => User, (user) => user.orders)
-  //   user: User;
-
   @ManyToOne(() => User, (user) => user.orders)
   user: User;
 

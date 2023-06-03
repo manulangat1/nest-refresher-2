@@ -40,7 +40,7 @@ export class ProductController {
   }
 
   @Put(':id')
-  //   @Public()
+  // @Public()
   async addToOrder(
     @Param('id', ParseIntPipe) id: number,
     @GetUser() user: User,
