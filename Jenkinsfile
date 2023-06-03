@@ -20,11 +20,6 @@ pipeline {
                 steps {
                     script {
                         sh "echo Sonarqube analysis"
-                        // def scannerHome = tool 'SonarScanner';
-                        //     withSonarQubeEnv() {
-                        //     sh "${scannerHome}/bin/sonar-scanner"
-                        //     }
-
                     }
                 }
             }
@@ -33,22 +28,21 @@ pipeline {
             steps { 
                 script{
                     sh "echo This step pushed the built image to dockerhub"
-                    // withCredentials ([
-                    //         // usernamePassword(credentials:'docker-hub-creds', usernameVariable: USER , passwordVariable: PASS)
-                    //         usernamePassword(credentials:'docker-hub-creds', usernameVariable:'USER', passwordVariable:'PASSWORD')
-                    //     ])  {
-                    //     // sh "docker ps"
-                    //     sh " ${env.BRANCH_NAME}"
-                    // // sh "echo $PASSORD | docker login -u $USER --password-stdin"
-                    // // sh "docker push YOUR_IMAGE_NAME"
-                    // }
                     withCredentials([ 
                     usernamePassword(credentialsId:'docker-hub-creds', usernameVariable:'USER', passwordVariable:'PASSWORD')
                 ]) { 
-                    // sh "docker build . -t YOUR_IMAGE_NAME"
                     sh "echo $PASSWORD | docker login -u $USER --password-stdin"
                     sh "docker push manulangat/nest-refresher:latest"
                 }
+                }
+            }
+        }
+
+        stage ("Test docker compose step") {
+            steps { 
+                script { 
+                    sh "Hello there"
+                    sh "docker compose version"
                 }
             }
         }
