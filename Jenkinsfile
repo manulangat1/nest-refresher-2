@@ -42,7 +42,7 @@ pipeline {
             steps { 
                 script { 
                     sh "echo Hello there"
-                    sh "docker compose version"
+                    sh "echo docker compose version"
                 }
             }
         }
