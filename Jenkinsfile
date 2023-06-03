@@ -11,7 +11,7 @@ pipeline {
             steps { 
                 sh "echo This step builds  the docker image. Testing the new intergrations"
                 // sh 'docker-compose up'
-                sh "docker build . -t manulangat/nest-refresher:tagname"
+                sh "docker build . -t manulangat/nest-refresher:latest"
             }
         }
 
@@ -47,7 +47,7 @@ pipeline {
                 ]) { 
                     // sh "docker build . -t YOUR_IMAGE_NAME"
                     sh "echo $PASSWORD | docker login -u $USER --password-stdin"
-                    // sh "docker push YOUR_IMAGE_NAME"
+                    sh "docker push manulangat/nest-refresher:latest"
                 }
                 }
             }
