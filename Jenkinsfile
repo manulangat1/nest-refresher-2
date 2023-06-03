@@ -41,7 +41,7 @@ pipeline {
         stage ("Test docker compose step") {
             steps { 
                 script { 
-                    sh "Hello there"
+                    sh "echo Hello there"
                     sh "docker compose version"
                 }
             }
