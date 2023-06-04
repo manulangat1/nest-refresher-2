@@ -1,10 +1,11 @@
 import { ForbiddenException, HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/database/entities/User.entity';
+// import { User } from 'src/database/entities/User.entity';
 import { Repository } from 'typeorm';
 import * as argon2 from 'argon2';
 import { LoginUser } from './dto/Login.User.dto';
 import { JwtService } from '@nestjs/jwt';
+import { User } from '../database/entities/User.entity';
 
 @Injectable()
 export class AuthService {

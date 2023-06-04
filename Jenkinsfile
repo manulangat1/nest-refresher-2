@@ -11,7 +11,13 @@ pipeline {
             }
         }
 
-
+        stage("Run tests"){
+            steps {
+                script { 
+                    sh "npm run test:e2e"
+                }
+            }
+        }
 
         stage ("Get current app version and bump it") {
             steps {

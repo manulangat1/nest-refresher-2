@@ -10,12 +10,16 @@ import {
   Put,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
-import { Public } from 'src/auth/decorators/public.decorator';
+// import { Public } from 'src/auth/decorators/public.decorator';
 import { CreateProduct } from './dto';
-import { GetUser } from 'src/auth/decorators/get.user.decorator';
-import { User } from 'src/database/entities/User.entity';
-import { Product } from 'src/database/entities/Product.entity';
+// import { GetUser } from 'src/auth/decorators/get.user.decorator';
+// import { User } from 'src/database/entities/User.entity';
+// import { Product } from 'src/database/entities/Product.entity';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Product } from '../database/entities/Product.entity';
+import { GetUser } from '../auth/decorators/get.user.decorator';
+import { User } from '../database/entities/User.entity';
+import { Public } from '../auth/decorators/public.decorator';
 
 @ApiTags('product')
 @Controller('product')

@@ -5,13 +5,14 @@ import { LoginUser } from './dto/Login.User.dto';
 import { AuthGuard } from './guards';
 import { Public } from './decorators/public.decorator';
 import { GetUser } from './decorators/get.user.decorator';
-import { User } from 'src/database/entities/User.entity';
+// import { User } from 'src/database/entities/User.entity';
 import {
   ApiBadRequestResponse,
   ApiCreatedResponse,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { User } from '../database/entities/User.entity';
 
 @ApiTags('auth')
 @Controller('auth')

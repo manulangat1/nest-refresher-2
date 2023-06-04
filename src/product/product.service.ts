@@ -1,11 +1,15 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Product } from 'src/database/entities/Product.entity';
+// import { Product } from 'src/database/entities/Product.entity';
 import { Repository } from 'typeorm';
 import { CreateProduct } from './dto';
-import { OrderItem } from 'src/database/entities/OrderItem.entity';
-import { Order } from 'src/database/entities/Order.entity';
-import { User } from 'src/database/entities/User.entity';
+// import { OrderItem } from 'src/database/entities/OrderItem.entity';
+// import { Order } from 'src/database/entities/Order.entity';
+// import { User } from 'src/database/entities/User.entity';
+import { Product } from '../database/entities/Product.entity';
+import { OrderItem } from '../database/entities/OrderItem.entity';
+import { Order } from '../database/entities/Order.entity';
+import { User } from '../database/entities/User.entity';
 
 @Injectable()
 export class ProductService {
