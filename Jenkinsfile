@@ -7,6 +7,19 @@ pipeline {
             }
         }
 
+
+        stage ("Get current version") {
+            steps {
+                script {
+                    sh "echo This gets the current version and bumps it"
+
+                    when ( env.BRANCH_NAME) { 
+                        sh "echo $BRANCH_NAME"
+                    }
+                }
+            }
+        }
+
         stage("Build") { 
             steps { 
                 sh "echo This step builds  the docker image. Testing the new intergrations"
