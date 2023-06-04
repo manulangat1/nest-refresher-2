@@ -33,8 +33,8 @@ pipeline {
                     packageJson.version = NEW_V
                     echo "$newVersion"
                     // writeJSON file: 'package.json', json: packageJson
-                    // writeFile file: 'package.json', text: groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(packageJson))
-                    writeFile file: 'package.json', text: groovy.json.JsonOutput.toJson(packageJson)
+                    writeFile file: 'package.json', text: groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(packageJson))
+                    // writeFile file: 'package.json', text: groovy.json.JsonOutput.toJson(packageJson)
                 }
             }
         }
