@@ -11,6 +11,14 @@ pipeline {
             }
         }
 
+        stage("Delete docker caches") {
+            steps { 
+                script { 
+                    echo "Delete all docker caches"
+                    sh " docker system prune -f -v"
+                }
+            }
+        }
         
 
         stage ("Get current app version and bump it") {
