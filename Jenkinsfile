@@ -81,6 +81,14 @@ pipeline {
                         usernamePassword(credentialsId:"Github_credentials_for_manu" , usernameVariable: "USER" , passwordVariable: 'PASSWORD')
                     ]){
                         echo "Helo world"
+                        sh 'git config user.email "emmanuelthedeveloper@gmail.com"'
+                        sh 'git config user.name "manulangat1"'
+                        sh "git branch"
+                        sh "git status"
+                        sh "git remote set-url origin https://${USER}:${PASSWORD}@github.com/manulangat1/nest-refresher-2.git"
+                        sh " git add ."
+                        sh 'git commit -m "ci: version update bump ${IMAGE_TAG}"'
+                        sh 'git push origin HEAD:ft-jenkins-setup'
                     }
                 }
             }
