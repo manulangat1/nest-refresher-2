@@ -64,11 +64,24 @@ pipeline {
             }
         }
 
-        stage ("Test docker compose step") {
+        // stage ("Test docker compose step") {
+        //     steps { 
+        //         script { 
+        //             sh "echo Hello there"
+        //             sh "docker-compose version"
+        //         }
+        //     }
+        // }
+
+        stage ("Commit version update") { 
             steps { 
                 script { 
-                    sh "echo Hello there"
-                    sh "docker-compose version"
+                    echo "This commits the version upgrade to github"
+                    withCredentials([
+                        usernamePassword(credentialsId:"Github_credentials_for_manu" , usernameVariable: "USER" , passwordVariable: 'PASSWORD')
+                    ]){
+                        echo "Helo world"
+                    }
                 }
             }
         }
