@@ -25,7 +25,7 @@ pipeline {
 
                     def newVersion = incrementVersion(currentVersion)
                     echo "New version: $newVersion"
-                    env.newVersion = newVersion
+                    env.IMAGE_TAG = "$newVersion-$BUILD_NUMBER"
 
                     // packageJson.version = newVersion
                     // writeJSON file: 'package.json', json: packageJson
@@ -37,7 +37,7 @@ pipeline {
             steps { 
                 sh "echo This step builds  the docker image. Testing the new intergrations"
                 // sh 'docker-compose up'
-                sh "docker build . -t manulangat/nest-refresher:$newVersion"
+                sh "docker build . -t manulangat/nest-refresher:$IMAGE_TAG"
             }
         }
 
@@ -58,7 +58,7 @@ pipeline {
                     usernamePassword(credentialsId:'docker-hub-creds', usernameVariable:'USER', passwordVariable:'PASSWORD')
                 ]) { 
                     sh "echo $PASSWORD | docker login -u $USER --password-stdin"
-                    sh "docker push manulangat/nest-refresher:$newVersion"
+                    sh "docker push manulangat/nest-refresher:$IMAGE_TAG"
                 }
                 }
             }
