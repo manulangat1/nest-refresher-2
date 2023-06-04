@@ -11,14 +11,14 @@ pipeline {
             }
         }
 
-        stage("Delete docker caches") {
-            steps { 
-                script { 
-                    echo "Delete all docker caches"
-                    sh " docker system prune -f"
-                }
-            }
-        }
+        // stage("Delete docker caches") {
+        //     steps { 
+        //         script { 
+        //             echo "Delete all docker caches"
+        //             sh " docker system prune -f"
+        //         }
+        //     }
+        // }
         
 
         stage ("Get current app version and bump it") {
@@ -129,7 +129,7 @@ pipeline {
             }
         }
 
-        stage("Delete docker caches") {
+        stage("Delete docker caches after") {
             steps { 
                 script { 
                     echo "Delete all docker caches"
