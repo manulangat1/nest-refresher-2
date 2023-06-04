@@ -22,8 +22,8 @@ pipeline {
                     def newVersion = incrementVersion(currentVersion)
                     echo "New version: $newVersion"
 
-                    packageJson.version = newVersion
-                    writeJSON file: 'package.json', json: packageJson
+                    // packageJson.version = newVersion
+                    // writeJSON file: 'package.json', json: packageJson
                 }
             }
         }
@@ -32,7 +32,7 @@ pipeline {
             steps { 
                 sh "echo This step builds  the docker image. Testing the new intergrations"
                 // sh 'docker-compose up'
-                sh "docker build . -t manulangat/nest-refresher:latest"
+                sh "docker build . -t manulangat/nest-refresher:$newVersion-$BUILD_NUMBER"
             }
         }
 
@@ -53,7 +53,7 @@ pipeline {
                     usernamePassword(credentialsId:'docker-hub-creds', usernameVariable:'USER', passwordVariable:'PASSWORD')
                 ]) { 
                     sh "echo $PASSWORD | docker login -u $USER --password-stdin"
-                    sh "docker push manulangat/nest-refresher:latest"
+                    sh "docker push manulangat/nest-refresher:$newVersion-$BUILD_NUMBER"
                 }
                 }
             }
