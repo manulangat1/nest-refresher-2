@@ -27,8 +27,9 @@ pipeline {
                     def newVersion = incrementVersion(currentVersion)
                     echo "New version: $newVersion"
                     env.IMAGE_TAG = "$newVersion-$BUILD_NUMBER"
-                    env.NEW_V = "$newVersion"
+                    env.NEW_V = newVersion
 
+                    echo "NEW_V : $NEW_V"
                     packageJson.version = NEW_V
                     echo "$newVersion"
                     // writeJSON file: 'package.json', json: packageJson
