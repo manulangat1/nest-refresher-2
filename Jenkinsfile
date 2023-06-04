@@ -13,9 +13,9 @@ pipeline {
                 script {
                     sh "echo This gets the current version and bumps it"
 
-                    when ( env.BRANCH_NAME) { 
+                    // when ( env.BRANCH_NAME) { 
                         sh "echo $BRANCH_NAME"
-                    }
+                    // }
                 }
             }
         }
