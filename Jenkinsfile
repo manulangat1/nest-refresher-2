@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     sh "echo This gets the current version and bumps it"
-                    sh "${env.BRANCH_NAME}"
+                    sh "${env.BUILD_NUMBER}"
 
                     // when ( env.BRANCH_NAME) { 
                         // sh "echo $BRANCH_NAME"
