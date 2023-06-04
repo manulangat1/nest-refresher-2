@@ -1,8 +1,8 @@
 pipeline { 
     agent any 
-    environment {
-        def newVersion
-    }
+    // environment {
+    //     def newVersion
+    // }
     stages {
         stage("Init") {
             steps { 
