@@ -1,11 +1,15 @@
 pipeline { 
     agent any 
+    environment {
+        def newVersion
+    }
     stages {
         stage("Init") {
             steps { 
                 sh " echo Hello world"
             }
         }
+
 
 
         stage ("Get current version") {
