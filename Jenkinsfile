@@ -15,7 +15,7 @@ pipeline {
             steps { 
                 script { 
                     echo "Delete all docker caches"
-                    sh " docker system prune -f -v"
+                    sh " docker system prune -f"
                 }
             }
         }
