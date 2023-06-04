@@ -11,13 +11,7 @@ pipeline {
             }
         }
 
-        stage("Run tests"){
-            steps {
-                script { 
-                    sh "npm run test:e2e"
-                }
-            }
-        }
+        
 
         stage ("Get current app version and bump it") {
             steps {
@@ -53,6 +47,13 @@ pipeline {
             }
         }
 
+        stage("Run tests"){
+            steps {
+                script { 
+                    sh "docker run exec manulangat/nest-refresher:$IMAGE_TAG npm run test:e2e "
+                }
+            }
+        }
 
          stage('SonarQube Analysis') {
                 steps {
