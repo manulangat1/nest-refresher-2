@@ -79,7 +79,7 @@ pipeline {
         //     }
         // }
 
-        stage ("Commit version update") { 
+        stage ("Commit bump version to github") { 
             steps { 
                 script { 
                     echo "This commits the version upgrade to github"
@@ -87,8 +87,8 @@ pipeline {
                         usernamePassword(credentialsId:"Github_credentials_for_manu" , usernameVariable: "USER" , passwordVariable: 'PASSWORD')
                     ]){
                         echo "Helo world"
-                        sh 'git config user.email "emmanuelthedeveloper@gmail.com"'
-                        sh 'git config user.name "manulangat1"'
+                        sh 'git config --global user.email "jenkins@gmail.com"'
+                        sh 'git config --global  user.name "jenkins"'
                         sh "git branch"
                         sh "git status"
                         sh "git remote set-url origin https://${USER}:${PASSWORD}@github.com/manulangat1/nest-refresher-2.git"
