@@ -128,6 +128,15 @@ pipeline {
                 }
             }
         }
+
+        stage("Delete docker caches") {
+            steps { 
+                script { 
+                    echo "Delete all docker caches"
+                    sh " docker system prune -f"
+                }
+            }
+        }
     }
 }
 
