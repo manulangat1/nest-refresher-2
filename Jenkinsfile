@@ -50,8 +50,14 @@ pipeline {
         stage("Run tests"){
             steps {
                 script { 
-                    sh "docker ps"
+                    withCredentials( [
+                        usernamePassword(credentialsId:'docker-hub-creds', usernameVariable:'USER', passwordVariable:'PASSWORD') 
+                    ]){
+                        sh "docker ps"
+                        sh " docker run manulangat/nest-refresher:$IMAGE_TAG"
                     sh "docker run exec manulangat/nest-refresher:$IMAGE_TAG npm run test:e2e "
+                    }
+                    
                 }
             }
         }
