@@ -17,6 +17,7 @@ pipeline {
                     def currentVersion = packageJson.version
                     echo "Current version: ${currentVersion}"
 
+                    echo "$BUILD_NUMBER"
                     // def packageJson = readJSON file: 'package.json'
                     // def packageVersion = packageJSON.version
                     // echo "${packageJSONVersion}"
