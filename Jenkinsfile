@@ -43,7 +43,7 @@ pipeline {
             steps { 
                 sh "echo This step builds  the docker image. Testing the new intergrations"
                 // sh 'docker-compose up'
-                sh "docker build . -t manulangat/nest-refresher:$IMAGE_TAG"
+                sh "docker build . -t manulangat/nest-refresher:$IMAGE_TAG  -d"
             }
         }
 
