@@ -21,15 +21,9 @@ pipeline {
 
                     def newVersion = incrementVersion(currentVersion)
                     echo "New version: $newVersion"
-                    // def packageJson = readJSON file: 'package.json'
-                    // def packageVersion = packageJSON.version
-                    // echo "${packageJSONVersion}"
-                    // sh(script: 'npm run version', returnStdout: true)
-                    // sh "$env.BUILD_NUMBER"
 
-                    // when ( env.BRANCH_NAME) { 
-                        // sh "echo $BRANCH_NAME"
-                    // }
+                    packageJson.version = newVersion
+                    writeJSON file: 'package.json', json: packageJson
                 }
             }
         }
