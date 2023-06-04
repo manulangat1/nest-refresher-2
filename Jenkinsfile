@@ -13,10 +13,14 @@ pipeline {
                 script {
                     sh "echo This gets the current version and bumps it"
 
+                    def packageJson = readJSON file: 'package.json'
+                    def currentVersion = packageJson.version
+                    echo "Current version: ${currentVersion}"
+
                     // def packageJson = readJSON file: 'package.json'
                     // def packageVersion = packageJSON.version
                     // echo "${packageJSONVersion}"
-                    sh(script: 'npm run version', returnStdout: true)
+                    // sh(script: 'npm run version', returnStdout: true)
                     // sh "$env.BUILD_NUMBER"
 
                     // when ( env.BRANCH_NAME) { 
