@@ -12,6 +12,10 @@ pipeline {
             steps {
                 script {
                     sh "echo This gets the current version and bumps it"
+
+                    def packageJson = readJSON file: 'package.json'
+                    def packageVersion = packageJSON.version
+                    echo "${packageJSONVersion}"
                     // sh "$env.BUILD_NUMBER"
 
                     // when ( env.BRANCH_NAME) { 
