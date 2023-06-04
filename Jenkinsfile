@@ -1,4 +1,4 @@
-import org.json.JSONObject
+
 pipeline { 
     agent any 
     // environment {
@@ -18,30 +18,19 @@ pipeline {
                 script {
                     sh "echo This gets the current version and bumps it"
 
-                    // def packageJson = readJSON file: 'package.json'
-                    // def currentVersion = packageJson.version
-                    // echo "Current version: ${currentVersion}"
-
-                    // echo "$BUILD_NUMBER"
-
-                    // def newVersion = incrementVersion(currentVersion)
-                    // echo "New version: $newVersion"
-                    // env.IMAGE_TAG = "$newVersion-$BUILD_NUMBER"
-
-                    // packageJson.version = newVersion
-                    // writeJSON file: 'package.json', json: packageJson
-
-                    //here 
-                    def packageJsonContent = readFile 'package.json'
-                    def packageJson = new JSONObject(packageJsonContent)
-                    def currentVersion = packageJson.getString('version')
+                    def packageJson = readJSON file: 'package.json'
+                    def currentVersion = packageJson.version
                     echo "Current version: ${currentVersion}"
-                    def newVersion = incrementVersion(currentVersion)
-                    echo "New version: ${newVersion}"
-                    packageJson.put('version', newVersion)
-                    writeFile file: 'package.json', text: packageJson.toString()
 
+                    echo "$BUILD_NUMBER"
+
+                    def newVersion = incrementVersion(currentVersion)
+                    echo "New version: $newVersion"
                     env.IMAGE_TAG = "$newVersion-$BUILD_NUMBER"
+
+                    packageJson.version = newVersion
+                    echo "$newVersion"
+                    writeJSON file: 'package.json', json: packageJson
                 }
             }
         }
