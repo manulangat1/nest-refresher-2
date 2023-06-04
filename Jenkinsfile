@@ -27,8 +27,9 @@ pipeline {
                     def newVersion = incrementVersion(currentVersion)
                     echo "New version: $newVersion"
                     env.IMAGE_TAG = "$newVersion-$BUILD_NUMBER"
+                    env.NEW_V = "$newVersion"
 
-                    packageJson.version = newVersion
+                    packageJson.version = NEW_V
                     echo "$newVersion"
                     // writeJSON file: 'package.json', json: packageJson
                     // writeFile file: 'package.json', text: groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(packageJson))
