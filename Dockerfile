@@ -8,7 +8,7 @@ RUN npm install --force
 
 COPY . . 
 
-RUN npm run start:dev
+# RUN npm run start:dev
 
 
 # CMD [ "node", "dist/main.js" ]
