@@ -25,6 +25,7 @@ pipeline {
 
                     def newVersion = incrementVersion(currentVersion)
                     echo "New version: $newVersion"
+                    env.newVersion = newVersion
 
                     // packageJson.version = newVersion
                     // writeJSON file: 'package.json', json: packageJson
