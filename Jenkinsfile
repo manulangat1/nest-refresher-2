@@ -13,7 +13,7 @@ pipeline {
 
 
 
-        stage ("Get current version") {
+        stage ("Get current app version and bump it") {
             steps {
                 script {
                     sh "echo This gets the current version and bumps it"
@@ -39,7 +39,7 @@ pipeline {
             }
         }
 
-        stage("Build") { 
+        stage("Build app images") { 
             steps { 
                 sh "echo This step builds  the docker image. Testing the new intergrations"
                 // sh 'docker-compose up'
@@ -70,6 +70,13 @@ pipeline {
             }
         }
 
+        stage ("Deploy artifacts to nexus") { 
+            steps { 
+                script{
+                    echo " Pushing to nexus"
+                }
+            }
+        }
         // stage ("Test docker compose step") {
         //     steps { 
         //         script { 
