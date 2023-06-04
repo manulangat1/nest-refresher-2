@@ -27,8 +27,8 @@ pipeline {
                     echo "New version: $newVersion"
                     env.IMAGE_TAG = "$newVersion-$BUILD_NUMBER"
 
-                    packageJson.version = newVersion
-                    writeJSON file: 'package.json', json: packageJson
+                    // packageJson.version = newVersion
+                    // writeJSON file: 'package.json', json: packageJson
                 }
             }
         }
