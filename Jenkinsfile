@@ -101,7 +101,7 @@ pipeline {
         }
 
 
-        stage ("Provinsion server") { 
+        stage ("Provinsion digital ocean server") { 
             environment { 
                 token = credentials('token')
                 key_fingerprint = credentials('key_fingerprint')
