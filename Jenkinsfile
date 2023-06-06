@@ -112,6 +112,7 @@ pipeline {
                     dir('terraform_config') {
                         sh "terraform init"
                         sh "terraform plan --var token=$token --var key_fingerprint=$key_fingerprint"
+                        sh "terraform apply --auto-approve --var token=$token --var key_fingerprint=$key_fingerprint"
                         // sh "terraform plan"
                     }
                 }
