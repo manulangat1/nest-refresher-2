@@ -99,15 +99,19 @@ pipeline {
                 }
             }
         }
-        // stage ("Test docker compose step") {
-        //     steps { 
-        //         script { 
-        //             sh "echo Hello there"
-        //             sh "docker-compose version"
-        //         }
-        //     }
-        // }
 
+
+        stage ("Provinsion server") { 
+            steps {
+                script {
+                    echo "New server is created here"
+                    dir('terraform_config') {
+                        sh "terraform init"
+                        sh "terraform plan"
+                    }
+                }
+            }
+        }
         stage ("Commit bump version to github") { 
             steps { 
                 script { 
