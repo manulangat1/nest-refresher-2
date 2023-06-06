@@ -114,6 +114,11 @@ pipeline {
                         sh "terraform plan --var token=$token --var key_fingerprint=$key_fingerprint"
                         sh "terraform apply --auto-approve --var token=$token --var key_fingerprint=$key_fingerprint"
                         // sh "terraform plan"
+                        PUBLIC_IP  = sh(
+                            script:"terraform output newly_created"
+                            returnStdout: true
+                        ).trim()
+                        echo "$PUBLIC_IP"
                     }
                 }
             }
