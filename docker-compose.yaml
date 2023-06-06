@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  web: 
+    build:  .
+    ports:
+      -  "3000:3000"
+    command: "npm run start:dev"
+    depends_on:
+      - nginx
+    networks:
+      - alx
+
+  nginx: 
+    image: nginx
+    networks:
+      - alx
+
+networks:
+  alx:
+
