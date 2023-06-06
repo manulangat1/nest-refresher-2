@@ -147,6 +147,7 @@ pipeline {
         stage("Delete docker caches after") {
             steps { 
                 script { 
+                    sleep(time:90, units:"SECONDS")
                     echo "Delete all docker caches"
                     sh " docker system prune -f --volumes"
                 }
