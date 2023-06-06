@@ -107,7 +107,7 @@ pipeline {
                     echo "New server is created here"
                     dir('terraform_config') {
                         sh "terraform init"
-                        sh "terraform plan"
+                        // sh "terraform plan"
                     }
                 }
             }
