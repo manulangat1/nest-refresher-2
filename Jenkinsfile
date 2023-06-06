@@ -111,8 +111,8 @@ pipeline {
                     echo "New server is created here"
                     dir('terraform_config') {
                         sh "terraform init"
-                        // sh "terraform plan --var token=$token --var key_fingerprint=$key_fingerprint"
-                        sh "terraform plan"
+                        sh "terraform plan --var token=$token --var key_fingerprint=$key_fingerprint"
+                        // sh "terraform plan"
                     }
                 }
             }
